@@ -1,722 +1,1236 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Green Network - Protect Earth</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        :root {
-            --primary: #2e7d32;
-            --secondary: #4caf50;
-            --accent: #8bc34a;
-            --light: #e8f5e9;
-            --dark: #1b5e20;
-            --text: #333333;
-            --white: #ffffff;
-        }
-
-        body {
-            background-color: var(--light);
-            color: var(--text);
-            line-height: 1.6;
-        }
-
-        header {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: var(--white);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
-
-        .logo i {
-            font-size: 2rem;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-
-        nav ul li {
-            margin-left: 2rem;
-        }
-
-        nav ul li a {
-            color: var(--white);
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            padding: 0.5rem 0;
-            position: relative;
-        }
-
-        nav ul li a:hover {
-            color: var(--accent);
-        }
-
-        nav ul li a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--accent);
-            transition: width 0.3s ease;
-        }
-
-        nav ul li a:hover::after {
-            width: 100%;
-        }
-
-        .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80');
-            background-size: cover;
-            background-position: center;
-            height: 80vh;
-            display: flex;
-            align-items: center;
-            text-align: center;
-            color: var(--white);
-        }
-
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-        }
-
-        .btn {
-            display: inline-block;
-            background-color: var(--accent);
-            color: var(--white);
-            padding: 0.8rem 2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .btn:hover {
-            background-color: var(--primary);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-        }
-
-        section {
-            padding: 5rem 0;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .section-title h2 {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background-color: var(--accent);
-            border-radius: 2px;
-        }
-
-        .section-title p {
-            color: var(--text);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .about-img {
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .about-img img {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: transform 0.5s ease;
-        }
-
-        .about-img:hover img {
-            transform: scale(1.05);
-        }
-
-        .about-text h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            color: var(--dark);
-        }
-
-        .about-text p {
-            margin-bottom: 1.5rem;
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 2rem 1rem;
-            background-color: var(--white);
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .stat-item:hover {
-            transform: translateY(-10px);
-        }
-
-        .stat-item i {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        .stat-item h3 {
-            font-size: 2.5rem;
-            color: var(--dark);
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-item p {
-            color: var(--text);
-        }
-
-        .initiatives {
-            background-color: var(--white);
-        }
-
-        .initiatives-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-        }
-
-        .initiative-card {
-            background-color: var(--light);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .initiative-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .initiative-img {
-            height: 200px;
-            overflow: hidden;
-        }
-
-        .initiative-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .initiative-card:hover .initiative-img img {
-            transform: scale(1.1);
-        }
-
-        .initiative-content {
-            padding: 1.5rem;
-        }
-
-        .initiative-content h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--dark);
-        }
-
-        .initiative-content p {
-            margin-bottom: 1.5rem;
-        }
-
-        .cta {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: var(--white);
-            text-align: center;
-            padding: 5rem 0;
-        }
-
-        .cta h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .cta p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .cta .btn {
-            background-color: var(--white);
-            color: var(--primary);
-        }
-
-        .cta .btn:hover {
-            background-color: var(--accent);
-            color: var(--white);
-        }
-
-        footer {
-            background-color: var(--dark);
-            color: var(--white);
-            padding: 3rem 0 1rem;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-column h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1.5rem;
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .footer-column h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 40px;
-            height: 2px;
-            background-color: var(--accent);
-        }
-
-        .footer-column p {
-            margin-bottom: 1rem;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-links li a {
-            color: var(--light);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .footer-links li a:hover {
-            color: var(--accent);
-            padding-left: 5px;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .social-links a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            color: var(--white);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            background-color: var(--accent);
-            transform: translateY(-5px);
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .mobile-menu {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        @media (max-width: 992px) {
-            .about-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .initiatives-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .footer-content {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero p {
-                font-size: 1.1rem;
-            }
-            
-            nav ul {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background-color: var(--primary);
-                flex-direction: column;
-                padding: 1rem 0;
-                text-align: center;
-                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-            }
-            
-            nav ul.active {
-                display: flex;
-            }
-            
-            nav ul li {
-                margin: 0;
-                padding: 0.8rem 0;
-            }
-            
-            .mobile-menu {
-                display: block;
-            }
-            
-            .initiatives-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .footer-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .stats {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Animation for stats counter */
-        .counter {
-            transition: all 0.5s ease;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="探索人工智能的发展历史、核心技术、产业应用、未来趋势以及伦理、安全与社会影响。">
+<title>AI Frontier | 人工智能的发展与未来展望</title>
+<style>
+:root{
+  --bg:#070b17;
+  --bg2:#0b1225;
+  --panel:#101a30;
+  --panel2:#14213b;
+  --text:#e8efff;
+  --muted:#98a8c7;
+  --line:#263858;
+  --cyan:#53e4f3;
+  --blue:#748bff;
+  --purple:#b18cff;
+  --green:#6ce5b1;
+  --orange:#ffbe77;
+  --shadow:0 12px 40px rgba(0,0,0,.25);
+}
+body.light{
+  --bg:#f2f5fc;
+  --bg2:#e9eef9;
+  --panel:#ffffff;
+  --panel2:#f5f8ff;
+  --text:#192744;
+  --muted:#5f6e8b;
+  --line:#d8e1f1;
+  --cyan:#087d99;
+  --blue:#405ce0;
+  --purple:#8054d8;
+  --green:#138b64;
+  --orange:#a96316;
+  --shadow:0 10px 30px rgba(34,55,100,.08);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:system-ui,-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;
+  line-height:1.8;
+  transition:background .25s,color .25s;
+}
+a{color:var(--cyan);text-decoration:none}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+button:focus-visible,a:focus-visible,input:focus-visible{
+  outline:2px solid var(--cyan);outline-offset:3px;
+}
+::selection{background:var(--blue);color:#fff}
+.container{width:min(1160px,92%);margin:auto}
+.muted{color:var(--muted)}
+.small{font-size:13px}
+.accent{color:var(--cyan)}
+.gradient-text{
+  background:linear-gradient(90deg,var(--cyan),var(--blue),var(--purple));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.navbar{
+  position:sticky;top:0;z-index:100;
+  background:color-mix(in srgb,var(--bg) 90%,transparent);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--line);
+}
+.nav-inner{
+  width:min(1250px,94%);margin:auto;min-height:68px;
+  display:flex;align-items:center;justify-content:space-between;gap:18px;
+}
+.logo{font-size:18px;font-weight:850;letter-spacing:.4px;white-space:nowrap}
+.logo-symbol{color:var(--cyan);margin-right:8px}
+.nav-links{display:flex;gap:20px;align-items:center}
+.nav-links a{font-size:13px;color:var(--muted)}
+.nav-links a:hover{color:var(--cyan)}
+.nav-actions{display:flex;gap:8px}
+.icon-btn,.menu-btn{
+  border:1px solid var(--line);background:var(--panel);
+  color:var(--text);border-radius:9px;padding:8px 11px;
+}
+.menu-btn{display:none}
+.progress-top{height:3px;background:var(--line)}
+#readingProgress{height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--purple))}
+.hero{
+  position:relative;overflow:hidden;
+  padding:95px 0 75px;
+  background:
+    radial-gradient(ellipse at 80% 20%,rgba(92,104,255,.20),transparent 40%),
+    radial-gradient(ellipse at 15% 70%,rgba(40,210,220,.10),transparent 35%),
+    var(--bg);
+}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;align-items:center;gap:45px}
+.eyebrow{
+  display:inline-flex;gap:9px;align-items:center;
+  color:var(--cyan);font-size:12px;letter-spacing:2px;
+  border:1px solid var(--line);border-radius:30px;padding:6px 13px;
+  background:var(--panel);
+}
+.pulse{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 12px var(--green)}
+.hero h1{font-size:clamp(38px,6vw,70px);line-height:1.16;margin:24px 0}
+.hero p{font-size:16px;max-width:660px;color:var(--muted)}
+.hero-buttons{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.btn{
+  border:1px solid var(--line);border-radius:10px;padding:11px 19px;
+  color:var(--text);background:var(--panel);display:inline-flex;
+  align-items:center;justify-content:center;gap:8px;
+  transition:transform .2s,border-color .2s;
+}
+.btn:hover{transform:translateY(-2px);border-color:var(--cyan)}
+.btn-primary{
+  color:#07121d;border:0;font-weight:800;
+  background:linear-gradient(100deg,var(--cyan),#a3a0ff);
+}
+body.light .btn-primary{color:white}
+.hero-visual{position:relative;min-height:360px;display:grid;place-items:center}
+.orbit{
+  position:absolute;width:290px;height:290px;border-radius:50%;
+  border:1px solid rgba(83,228,243,.24);
+  box-shadow:0 0 65px rgba(83,228,243,.05),inset 0 0 55px rgba(116,139,255,.06);
+}
+.orbit.two{width:220px;height:220px;border-color:rgba(177,140,255,.5);transform:rotateX(65deg) rotateZ(25deg)}
+.orbit.three{width:350px;height:130px;border-color:rgba(83,228,243,.25);transform:rotate(-35deg)}
+.ai-core{
+  width:125px;height:125px;border-radius:35px;transform:rotate(45deg);
+  display:grid;place-items:center;
+  border:1px solid var(--cyan);
+  background:linear-gradient(135deg,rgba(83,228,243,.20),rgba(116,139,255,.18));
+  box-shadow:0 0 70px rgba(83,228,243,.16);
+}
+.ai-core span{transform:rotate(-45deg);font-size:35px;font-weight:900;color:var(--cyan)}
+.float-tag{
+  position:absolute;background:var(--panel);border:1px solid var(--line);
+  padding:9px 13px;border-radius:10px;font-size:12px;box-shadow:var(--shadow);
+}
+.float-tag b{color:var(--cyan)}
+.tag-a{top:36px;right:0}
+.tag-b{bottom:48px;left:0}
+.tag-c{top:45%;right:-5px}
+.section{padding:75px 0}
+.section-alt{background:var(--bg2);border-block:1px solid var(--line)}
+.section-head{max-width:770px;margin-bottom:34px}
+.kicker{font-size:12px;letter-spacing:2px;color:var(--cyan);font-weight:800}
+h2{font-size:clamp(27px,4vw,40px);line-height:1.35;margin:10px 0 15px}
+h3{font-size:19px;line-height:1.5;margin:0 0 12px}
+p{margin:10px 0}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.card{
+  border:1px solid var(--line);border-radius:15px;padding:24px;
+  background:var(--panel);box-shadow:var(--shadow);
+  transition:transform .22s,border-color .22s;
+}
+.card:hover{transform:translateY(-4px);border-color:var(--cyan)}
+.card-icon{font-size:27px;margin-bottom:13px}
+.card p{font-size:14px;color:var(--muted)}
+.tag{
+  display:inline-block;padding:3px 9px;margin:5px 4px 0 0;
+  border-radius:6px;font-size:11px;color:var(--cyan);
+  background:rgba(83,228,243,.08);border:1px solid rgba(83,228,243,.15);
+}
+.stats{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:0;
+}
+.stat{
+  border:1px solid var(--line);border-radius:12px;padding:20px;
+  background:var(--panel);
+}
+.stat strong{display:block;font-size:24px;color:var(--cyan)}
+.stat span{font-size:12px;color:var(--muted)}
+/* 时间轴 */
+.timeline{position:relative;max-width:900px;margin:30px auto}
+.timeline:before{
+  content:"";position:absolute;left:119px;top:0;bottom:0;
+  width:1px;background:linear-gradient(var(--cyan),var(--purple),transparent);
+}
+.timeline-item{
+  position:relative;display:grid;grid-template-columns:95px 1fr;
+  gap:50px;margin-bottom:25px;
+}
+.timeline-year{text-align:right;color:var(--cyan);font-weight:800;padding-top:22px}
+.timeline-body{
+  position:relative;border:1px solid var(--line);border-radius:13px;
+  padding:20px;background:var(--panel);
+}
+.timeline-body:before{
+  content:"";position:absolute;left:-37px;top:29px;
+  width:11px;height:11px;border-radius:50%;background:var(--cyan);
+  box-shadow:0 0 13px rgba(83,228,243,.5);
+}
+.timeline-body p{color:var(--muted);font-size:14px}
+.timeline-body h3{margin-bottom:5px}
+.timeline-body .year-tag{font-size:11px;color:var(--purple);letter-spacing:1px}
+/* 技术流程 */
+.pipeline{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:12px;
+  margin:25px 0;
+}
+.pipe-item{
+  position:relative;border:1px solid var(--line);background:var(--panel);
+  border-radius:12px;padding:22px 16px;text-align:center;
+}
+.pipe-item:not(:last-child):after{
+  content:"→";position:absolute;right:-15px;top:35%;
+  color:var(--cyan);font-size:22px;z-index:2;
+}
+.pipe-item strong{display:block;color:var(--cyan);margin-bottom:7px}
+.pipe-item span{font-size:12px;color:var(--muted)}
+.code-panel{
+  border:1px solid var(--line);border-radius:13px;overflow:hidden;
+  background:#090f20;margin-top:20px;
+}
+.code-head{
+  padding:12px 16px;border-bottom:1px solid #25334e;
+  display:flex;justify-content:space-between;align-items:center;
+  color:#aab9d6;font-size:12px;
+}
+.code-dots{display:flex;gap:5px}
+.code-dots i{width:8px;height:8px;border-radius:50%;background:#65748e}
+.code-panel pre{
+  white-space:pre-wrap;overflow-wrap:anywhere;margin:0;
+  padding:22px;color:#b6d5e8;font:13px/2.1 ui-monospace,Consolas,monospace;
+}
+.code-panel .comment{color:#6d91a7}
+.code-panel .key{color:#65e9cf}
+.code-panel .value{color:#b6a0ff}
+/* 应用过滤 */
+.filter-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+.filter-btn{
+  padding:9px 14px;border-radius:9px;border:1px solid var(--line);
+  color:var(--muted);background:var(--panel);
+}
+.filter-btn.active{color:var(--cyan);border-color:var(--cyan);background:rgba(83,228,243,.08)}
+.application-card[hidden]{display:none}
+.app-icon{font-size:25px;margin-bottom:12px}
+/* 图表 */
+.chart-wrap{
+  padding:24px;background:var(--panel);border:1px solid var(--line);
+  border-radius:15px;
+}
+.chart-wrap canvas{width:100%;height:310px;display:block}
+.chart-legend{display:flex;flex-wrap:wrap;gap:15px;font-size:12px;color:var(--muted)}
+.legend-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px}
+.chart-note{font-size:12px;color:var(--muted);margin-top:15px}
+/* 风险 */
+.risk-item{display:flex;gap:15px;padding:18px 0;border-bottom:1px solid var(--line)}
+.risk-icon{
+  flex:0 0 40px;height:40px;border-radius:10px;
+  display:grid;place-items:center;background:var(--panel2);font-size:19px;
+}
+.risk-item h3{font-size:16px;margin:0 0 5px}
+.risk-item p{font-size:13px;color:var(--muted);margin:0}
+.balance-box{
+  padding:30px;border-radius:15px;border:1px solid var(--line);
+  background:linear-gradient(130deg,var(--panel),var(--panel2));
+}
+/* 预测卡片 */
+.forecast-card{min-height:235px;display:flex;flex-direction:column}
+.forecast-card .horizon{font-size:11px;letter-spacing:1.5px;color:var(--purple);font-weight:800}
+.forecast-card h3{margin-top:12px}
+.forecast-card .bottom{margin-top:auto;padding-top:18px}
+.confidence{height:5px;background:var(--line);border-radius:8px;margin-top:8px;overflow:hidden}
+.confidence span{height:100%;display:block;background:linear-gradient(90deg,var(--cyan),var(--purple))}
+/* 知识问答 */
+.quiz-option{
+  display:block;width:100%;text-align:left;margin:9px 0;
+  padding:13px 15px;border-radius:9px;border:1px solid var(--line);
+  background:var(--panel);color:var(--text);
+}
+.quiz-option:hover{border-color:var(--cyan)}
+.quiz-option.correct{border-color:var(--green);background:rgba(108,229,177,.08)}
+.quiz-option.wrong{border-color:#ff8b9a;background:rgba(255,139,154,.08)}
+.quiz-feedback{margin-top:14px;padding:14px;border-radius:10px;background:var(--panel2);font-size:14px}
+.quiz-footer{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:20px}
+.footer{
+  padding:55px 0;background:#060a13;border-top:1px solid var(--line);
+  color:#d8e5ff;
+}
+.footer-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:35px}
+.footer a{display:block;color:#9eb0d0;font-size:13px;margin:7px 0}
+.footer a:hover{color:var(--cyan)}
+.footer p{font-size:13px;color:#8294b5}
+.back-top{
+  position:fixed;right:22px;bottom:22px;z-index:80;
+  width:43px;height:43px;border-radius:11px;
+  border:1px solid var(--line);background:var(--panel);
+  color:var(--cyan);box-shadow:var(--shadow);
+}
+@media(max-width:900px){
+  .nav-links{display:none}
+  .menu-btn{display:inline-block}
+  .nav-links.open{
+    display:flex;position:absolute;top:68px;left:0;right:0;
+    background:var(--bg2);border-bottom:1px solid var(--line);
+    padding:20px 5%;flex-direction:column;align-items:flex-start;
+  }
+  .hero-grid{grid-template-columns:1fr}
+  .hero-visual{min-height:290px}
+  .grid-3{grid-template-columns:repeat(2,1fr)}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .pipeline{grid-template-columns:repeat(2,1fr)}
+  .pipe-item:nth-child(2):after{display:none}
+  .footer-grid{grid-template-columns:1fr}
+}
+@media(max-width:580px){
+  .hero{padding:65px 0 35px}
+  .hero-visual{min-height:240px;transform:scale(.85)}
+  .section{padding:52px 0}
+  .grid-2,.grid-3{grid-template-columns:1fr}
+  .timeline:before{left:13px}
+  .timeline-item{grid-template-columns:1fr;gap:8px;padding-left:35px}
+  .timeline-year{text-align:left;padding:0}
+  .timeline-body:before{left:-28px;top:25px}
+  .pipeline{grid-template-columns:1fr}
+  .pipe-item:after{display:none!important}
+  .chart-wrap{padding:12px}
+  .chart-wrap canvas{height:260px}
+  .quiz-footer{align-items:flex-start;flex-direction:column}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*:before,*:after{transition:none!important;animation:none!important}
+}
+</style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container nav-container">
-            <div class="logo">
-                <i class="fas fa-seedling"></i>
-                <span>Green Network</span>
-            </div>
-            <nav>
-                <div class="mobile-menu">
-                    <i class="fas fa-bars"></i>
-                </div>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#initiatives">Initiatives</a></li>
-                    <li><a href="#get-involved">Get Involved</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container hero-content">
-            <h1>Protect Our Planet, Preserve Our Future</h1>
-            <p>Join the global movement to create a sustainable world through conservation, education, and community action.</p>
-            <a href="#get-involved" class="btn">Join Our Network</a>
-        </div>
-    </section>
+<div class="progress-top"><div id="readingProgress"></div></div>
 
-    <!-- About Section -->
-    <section id="about">
-        <div class="container">
-            <div class="section-title">
-                <h2>About Green Network</h2>
-                <p>We are a global community dedicated to environmental protection and sustainable development.</p>
-            </div>
-            <div class="about-content">
-                <div class="about-img">
-                    <img src="https://images.unsplash.com/photo-1507591064344-4c6ce005b128?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Team planting trees">
-                </div>
-                <div class="about-text">
-                    <h3>Our Mission</h3>
-                    <p>Green Network is committed to creating a sustainable future by protecting natural ecosystems, promoting renewable energy, and empowering communities to take environmental action.</p>
-                    <p>Founded in 2010, we've grown from a small grassroots organization to an international network with over 50,000 members across 120 countries.</p>
-                    <p>Our approach combines scientific research, community engagement, and policy advocacy to address the most pressing environmental challenges of our time.</p>
-                    <a href="#" class="btn">Learn More</a>
-                </div>
-            </div>
-            <div class="stats">
-                <div class="stat-item">
-                    <i class="fas fa-tree"></i>
-                    <h3 class="counter" data-target="2500000">0</h3>
-                    <p>Trees Planted</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-users"></i>
-                    <h3 class="counter" data-target="50000">0</h3>
-                    <p>Active Members</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-globe-americas"></i>
-                    <h3 class="counter" data-target="120">0</h3>
-                    <p>Countries Reached</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-recycle"></i>
-                    <h3 class="counter" data-target="1500">0</h3>
-                    <p>Cleanup Projects</p>
-                </div>
-            </div>
-        </div>
-    </section>
+<header class="navbar">
+  <div class="nav-inner">
+    <a href="#home" class="logo"><span class="logo-symbol">◈</span>AI FRONTIER</a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#overview">发展概览</a>
+      <a href="#history">历史时间轴</a>
+      <a href="#technology">核心技术</a>
+      <a href="#applications">产业应用</a>
+      <a href="#future">未来展望</a>
+      <a href="#ethics">风险与治理</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="icon-btn" id="themeBtn" aria-label="切换主题">☼</button>
+      <button class="icon-btn menu-btn" id="menuBtn" aria-label="打开导航">☰</button>
+    </div>
+  </div>
+</header>
 
-    <!-- Initiatives Section -->
-    <section class="initiatives" id="initiatives">
-        <div class="container">
-            <div class="section-title">
-                <h2>Our Initiatives</h2>
-                <p>Discover the key programs and projects we're implementing to protect our planet.</p>
-            </div>
-            <div class="initiatives-grid">
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://dialogue.earth/content/uploads/2021/04/lessons-from-the-rush-to-reforest-china-dialogue-2400x1599.jpg" alt="Reforestation">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Global Reforestation</h3>
-                        <p>Planting millions of trees worldwide to restore ecosystems, combat climate change, and protect biodiversity.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://images.unsplash.com/photo-1621451537084-482c73073a0f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Ocean Conservation">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Ocean Conservation</h3>
-                        <p>Protecting marine ecosystems, reducing plastic pollution, and promoting sustainable fishing practices.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80" alt="Renewable Energy">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Renewable Energy</h3>
-                        <p>Promoting solar, wind, and other clean energy sources to reduce dependence on fossil fuels.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<main id="home">
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <span class="eyebrow"><span class="pulse"></span> ARTIFICIAL INTELLIGENCE · 2026</span>
+      <h1>智能时代，<br>正在重新定义<span class="gradient-text">未来。</span></h1>
+      <p>从早期的逻辑推理与专家系统，到深度学习、大语言模型和智能体，人工智能正在改变人类获取知识、创造内容、组织生产与探索科学的方式。</p>
+      <p>理解 AI，不只是了解一项技术，更是在理解未来社会的运行方式。</p>
+      <div class="hero-buttons">
+        <a class="btn btn-primary" href="#overview">探索 AI 世界 ↗</a>
+        <a class="btn" href="#history">回顾发展历史</a>
+      </div>
+      <p class="small" style="margin-top:25px">TECHNOLOGY · INDUSTRY · SOCIETY · FUTURE</p>
+    </div>
+    <div class="hero-visual" aria-label="人工智能科技主题视觉">
+      <div class="orbit"></div><div class="orbit two"></div><div class="orbit three"></div>
+      <div class="ai-core"><span>AI</span></div>
+      <div class="float-tag tag-a"><b>LLM</b> · 大语言模型</div>
+      <div class="float-tag tag-b"><b>AGENT</b> · 智能体</div>
+      <div class="float-tag tag-c"><b>∞</b> · 持续创新</div>
+    </div>
+  </div>
+</section>
 
-    <!-- CTA Section -->
-    <section class="cta" id="get-involved">
-        <div class="container">
-            <h2>Join Our Global Movement</h2>
-            <p>Together, we can create a sustainable future for generations to come. Every action counts, no matter how small.</p>
-            <a href="#" class="btn">Become a Member</a>
-        </div>
-    </section>
+<section class="section" id="overview">
+<div class="container">
+  <div class="section-head">
+    <span class="kicker">01 / OVERVIEW</span>
+    <h2>人工智能：从理论探索走向产业变革</h2>
+    <p class="muted">人工智能（Artificial Intelligence，简称 AI）是研究如何让机器执行通常需要人类智能才能完成的任务的技术与科学领域，包括感知、学习、推理、语言理解、规划和决策等。</p>
+  </div>
 
-    <!-- Footer -->
-    <footer id="contact">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>Green Network</h3>
-                    <p>We are dedicated to protecting our planet through collaborative action, education, and sustainable solutions.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#about">About Us</a></li>
-                        <li><a href="#initiatives">Initiatives</a></li>
-                        <li><a href="#get-involved">Get Involved</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Our Programs</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Reforestation</a></li>
-                        <li><a href="#">Ocean Cleanup</a></li>
-                        <li><a href="#">Wildlife Protection</a></li>
-                        <li><a href="#">Climate Education</a></li>
-                        <li><a href="#">Sustainable Agriculture</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Contact Us</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> Copper Creek Drive, New York</p>
-                    <p><i class="fas fa-phone"></i> +1 (312) 171-0771</p>
-                    <p><i class="fas fa-envelope"></i> support@greennetwork.org</p>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>&copy; 2025 Green Network. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
+  <div class="stats">
+    <div class="stat"><strong>1950</strong><span>图灵发表机器智能相关论文</span></div>
+    <div class="stat"><strong>1956</strong><span>达特茅斯会议推动 AI 成为研究领域</span></div>
+    <div class="stat"><strong>2012</strong><span>深度学习在视觉识别领域取得突破</span></div>
+    <div class="stat"><strong>2022+</strong><span>生成式 AI 进入大众应用阶段</span></div>
+  </div>
 
-    <script>
-        // Mobile Menu Toggle
-        document.querySelector('.mobile-menu').addEventListener('click', function() {
-            document.querySelector('nav ul').classList.toggle('active');
-        });
+  <div class="grid-3" style="margin-top:25px">
+    <article class="card">
+      <div class="card-icon">🧠</div>
+      <h3>感知与理解</h3>
+      <p>机器从图像、声音、文本和传感器数据中提取信息，识别环境、对象及其关系。</p>
+      <span class="tag">计算机视觉</span><span class="tag">语音识别</span>
+    </article>
+    <article class="card">
+      <div class="card-icon">✨</div>
+      <h3>生成与创造</h3>
+      <p>模型根据上下文生成文本、图像、音频、视频、程序代码及其他数字内容。</p>
+      <span class="tag">生成式 AI</span><span class="tag">多模态</span>
+    </article>
+    <article class="card">
+      <div class="card-icon">⚙️</div>
+      <h3>规划与执行</h3>
+      <p>智能系统将复杂目标拆解为步骤，调用工具、分析结果，并在必要时修正行动。</p>
+      <span class="tag">智能体</span><span class="tag">自动化</span>
+    </article>
+  </div>
+</div>
+</section>
 
-        // Counter Animation
-        function animateCounters() {
-            const counters = document.querySelectorAll('.counter');
-            const speed = 200; // The lower the slower
-            
-            counters.forEach(counter => {
-                const target = +counter.getAttribute('data-target');
-                const count = +counter.innerText;
-                
-                const inc = target / speed;
-                
-                if(count < target) {
-                    counter.innerText = Math.ceil(count + inc);
-                    setTimeout(animateCounters, 1);
-                } else {
-                    counter.innerText = target;
-                }
-            });
-        }
+<section class="section section-alt" id="history">
+<div class="container">
+  <div class="section-head">
+    <span class="kicker">02 / TIMELINE</span>
+    <h2>人工智能发展史：七十余年的探索</h2>
+    <p class="muted">AI 的发展并非一条直线上升的曲线，而是在理论突破、计算能力、数据规模和产业需求共同作用下不断演进。</p>
+  </div>
 
-        // Initialize counters when page loads
-        window.addEventListener('load', animateCounters);
+  <div class="timeline">
+    <article class="timeline-item">
+      <div class="timeline-year">1940s—1950s</div>
+      <div class="timeline-body">
+        <div class="year-tag">THEORETICAL FOUNDATIONS</div>
+        <h3>理论奠基：机器能否思考？</h3>
+        <p>早期计算理论、神经元数学模型和计算机科学为 AI 奠定基础。1950 年，艾伦·图灵发表讨论机器智能的论文，并提出后来广为人知的图灵测试概念。1956 年的达特茅斯研讨会成为人工智能研究史上的重要里程碑。</p>
+      </div>
+    </article>
+    <article class="timeline-item">
+      <div class="timeline-year">1950s—1970s</div>
+      <div class="timeline-body">
+        <div class="year-tag">SYMBOLIC AI</div>
+        <h3>符号主义与早期乐观</h3>
+        <p>研究人员尝试通过逻辑规则、符号表示和搜索算法解决数学证明、游戏及语言问题。早期系统展示了机器处理特定任务的潜力，但计算资源不足、知识获取困难以及现实环境的复杂性限制了其发展。</p>
+      </div>
+    </article>
+    <article class="timeline-item">
+      <div class="timeline-year">1970s—1990s</div>
+      <div class="timeline-body">
+        <div class="year-tag">EXPERT SYSTEMS</div>
+        <h3>专家系统兴起与 AI 寒冬</h3>
+        <p>基于人工编写规则的专家系统进入部分商业领域。然而，系统维护成本高、泛化能力弱，加上资金和技术预期之间存在差距，AI 经历了数轮投资收缩与研究调整。</p>
+      </div>
+    </article>
+    <article class="timeline-item">
+      <div class="timeline-year">1997</div>
+      <div class="timeline-body">
+        <div class="year-tag">MACHINE COMPETITION</div>
+        <h3>深蓝战胜国际象棋世界冠军</h3>
+        <p>IBM 深蓝击败加里·卡斯帕罗夫，展示了高速搜索、评估函数和专用计算系统在规则明确任务中的强大能力。但它并不具备人类式的通用理解能力。</p>
+      </div>
+    </article>
+    <article class="timeline-item">
+      <div class="timeline-year">2000s—2011</div>
+      <div class="timeline-body">
+        <div class="year-tag">DATA + COMPUTING</div>
+        <h3>数据、互联网与算力积累</h3>
+        <p>互联网数据、图形处理器和机器学习方法逐渐成熟。大规模数据集与更强的计算能力为训练复杂模型创造条件，AI 开始广泛应用于搜索、推荐、广告与语音处理。</p>
+      </div>
+    </article>
+    <article class="timeline-item">
+      <div class="timeline-year">2012—2016</div>
+      <div class="timeline-body">
+        <div class="year-tag">DEEP LEARNING</div>
+        <h3>深度学习推动感知能力突破</h3>
+        <p>2012 年 AlexNet 在 ImageNet 图像分类竞赛中取得显著成果，推动深度神经网络快速发展。随后，语音识别、机器翻译和强化学习不断进步。2016 年，AlphaGo 战胜顶尖围棋选手李世石，成为 AI 发展史上的标志性事件。</p>
+      </div>
+    </article>
+    <article class="timeline-item">
+      <div class="timeline-year">2017—2021</div>
+      <div class="timeline-body">
+        <div class="year-tag">TRANSFORMERS</div>
+        <h3>Transformer 与基础模型时代</h3>
+        <p>2017 年发表的《Attention Is All You Need》提出 Transformer 架构，成为现代许多大语言模型的重要技术基础。预训练、大规模数据和模型扩展推动语言理解、文本生成及多任务学习的发展。</p>
+      </div>
+    </article>
+    <article class="timeline-item">
+      <div class="timeline-year">2022—2023</div>
+      <div class="timeline-body">
+        <div class="year-tag">GENERATIVE AI</div>
+        <h3>生成式 AI 走向大众</h3>
+        <p>对话式大语言模型和文生图工具引起广泛关注。AI 从后台算法进入普通人的写作、编程、学习、设计和信息检索流程，也引发对真实性、版权、隐私与就业影响的讨论。</p>
+      </div>
+    </article>
+    <article class="timeline-item">
+      <div class="timeline-year">2024—2026</div>
+      <div class="timeline-body">
+        <div class="year-tag">MULTIMODAL + AGENTS</div>
+        <h3>多模态、推理能力与智能体探索</h3>
+        <p>AI 系统不断扩展对文本、图像、音频、视频和工具调用的支持。推理、长上下文、代码辅助和任务执行成为重要研发方向。行业也更加重视推理成本、评测可靠性、数据安全与实际业务价值。</p>
+      </div>
+    </article>
+  </div>
+  <p class="small muted">说明：上述时间轴是概括性历史梳理，并非完整年表。不同技术的成熟、商业化和普及时间并不相同。</p>
+</div>
+</section>
 
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if(targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                    
-                    document.querySelector('nav ul').classList.remove('active');
-                }
-            });
-        });
-    </script>
+<section class="section" id="technology">
+<div class="container">
+  <div class="section-head">
+    <span class="kicker">03 / TECHNOLOGY</span>
+    <h2>AI 的核心技术是如何工作的？</h2>
+    <p class="muted">现代 AI 并非单一算法，而是数据、模型、算力、训练方法、工具系统和应用场景共同构成的技术体系。</p>
+  </div>
+
+  <div class="grid-3">
+    <article class="card">
+      <div class="card-icon">📊</div>
+      <h3>机器学习</h3>
+      <p>通过数据与优化算法学习规律，而不是为每种情况都手工编写规则。常见方法包括监督学习、无监督学习和强化学习。</p>
+    </article>
+    <article class="card">
+      <div class="card-icon">🕸️</div>
+      <h3>深度学习</h3>
+      <p>利用多层神经网络学习复杂的特征表示，在视觉、语音、语言、预测和科学研究中发挥重要作用。</p>
+    </article>
+    <article class="card">
+      <div class="card-icon">🔤</div>
+      <h3>大语言模型</h3>
+      <p>通过大规模文本等数据进行预训练，并结合指令微调和其他优化方式，获得语言生成、总结、问答与代码处理能力。</p>
+    </article>
+    <article class="card">
+      <div class="card-icon">🧬</div>
+      <h3>多模态模型</h3>
+      <p>整合文本、图片、声音、视频等不同类型的信息，让模型能处理更丰富的输入与输出任务。</p>
+    </article>
+    <article class="card">
+      <div class="card-icon">🧮</div>
+      <h3>推理与规划</h3>
+      <p>模型通过中间步骤、搜索、验证或其他计算方法解决较复杂的问题。表现仍取决于任务、模型与验证机制。</p>
+    </article>
+    <article class="card">
+      <div class="card-icon">🤖</div>
+      <h3>AI 智能体</h3>
+      <p>智能体把模型与记忆、工具、任务状态及反馈机制结合起来，尝试完成多步骤工作，而不只是生成一段文字。</p>
+    </article>
+  </div>
+
+  <h3 style="margin-top:40px">从数据到应用：一个简化的 AI 工作流程</h3>
+  <div class="pipeline">
+    <div class="pipe-item"><strong>01 · 数据</strong><span>文本、图像、声音、业务记录</span></div>
+    <div class="pipe-item"><strong>02 · 训练</strong><span>模型学习数据中的统计规律</span></div>
+    <div class="pipe-item"><strong>03 · 推理</strong><span>接收问题并生成预测或输出</span></div>
+    <div class="pipe-item"><strong>04 · 评估</strong><span>检验质量、安全性与实际效果</span></div>
+  </div>
+
+  <div class="code-panel">
+    <div class="code-head">
+      <span>AI SYSTEM · CONCEPTUAL MODEL</span>
+      <div class="code-dots"><i></i><i></i><i></i></div>
+    </div>
+    <pre><span class="comment">// 一个 AI 应用系统的简化结构（概念示意）</span>
+
+<span class="key">用户输入</span>  →  问题、指令、上下文
+     ↓
+<span class="key">模型处理</span>  →  理解输入、计算相关结果
+     ↓
+<span class="key">工具调用</span>  →  搜索、数据库、代码或业务系统
+     ↓
+<span class="key">结果验证</span>  →  事实检查、权限检查、质量评估
+     ↓
+<span class="value">输出结果</span>  →  回答、报告、建议或任务执行结果
+
+<span class="comment">// 注意：不是所有 AI 应用都包含工具调用；
+// 真实系统通常还需要权限管理、日志、监控与异常处理。</span></pre>
+  </div>
+
+  <div class="callout" style="padding:20px;border:1px solid var(--line);border-radius:12px;margin-top:25px">
+    <h3 style="margin:0 0 8px">关键认识：大模型不等于数据库</h3>
+    <p class="muted">大语言模型主要通过训练学习模式并生成输出，不保证每次回答都正确。对于法律、医疗、财务、生产控制等重要任务，应结合可信数据来源、规则校验、人工审核与必要的专业判断。</p>
+  </div>
+</div>
+</section>
+
+<section class="section section-alt" id="applications">
+<div class="container">
+  <div class="section-head">
+    <span class="kicker">04 / APPLICATIONS</span>
+    <h2>AI 正在改变哪些行业？</h2>
+    <p class="muted">AI 的产业价值通常不在于“用了最先进的模型”，而在于是否解决了真实问题、改善了流程，并产生可以衡量的结果。</p>
+  </div>
+
+  <div class="filter-row" id="appFilters">
+    <button class="filter-btn active" data-filter="all">全部领域</button>
+    <button class="filter-btn" data-filter="industry">工业制造</button>
+    <button class="filter-btn" data-filter="science">科学医疗</button>
+    <button class="filter-btn" data-filter="business">商业办公</button>
+    <button class="filter-btn" data-filter="life">日常生活</button>
+  </div>
+
+  <div class="grid-3" id="applicationGrid">
+    <article class="card application-card" data-category="industry">
+      <div class="app-icon">🏭</div><h3>智能制造</h3>
+      <p>利用机器视觉进行缺陷检测，结合传感器数据预测设备故障，优化生产排程、能源使用与质量追溯。</p>
+      <span class="tag">预测性维护</span><span class="tag">质量检测</span>
+    </article>
+    <article class="card application-card" data-category="industry">
+      <div class="app-icon">🦾</div><h3>机器人与自动化</h3>
+      <p>将感知、规划和控制结合起来，支持仓储搬运、柔性装配、危险环境作业和部分服务任务。</p>
+      <span class="tag">机器人</span><span class="tag">自动化</span>
+    </article>
+    <article class="card application-card" data-category="industry">
+      <div class="app-icon">⚡</div><h3>能源与环境</h3>
+      <p>辅助预测风光发电、管理储能、优化电网运行，识别能源浪费并支持环境监测。</p>
+      <span class="tag">能源优化</span><span class="tag">低碳转型</span>
+    </article>
+    <article class="card application-card" data-category="science">
+      <div class="app-icon">🧬</div><h3>生命科学与药物研发</h3>
+      <p>辅助蛋白质结构研究、候选分子筛选、文献分析和实验设计，但仍需实验验证与专业审查。</p>
+      <span class="tag">生物信息学</span><span class="tag">药物发现</span>
+    </article>
+    <article class="card application-card" data-category="science">
+      <div class="app-icon">🩺</div><h3>医疗健康</h3>
+      <p>协助医学影像分析、临床文档整理、患者随访和科研数据处理，需关注隐私、偏差和临床安全。</p>
+      <span class="tag">辅助诊疗</span><span class="tag">健康管理</span>
+    </article>
+    <article class="card application-card" data-category="business">
+      <div class="app-icon">📈</div><h3>金融与商业分析</h3>
+      <p>支持风险识别、客户服务、文本分析、流程自动化和经营预测，但不能保证预测或投资建议正确。</p>
+      <span class="tag">风险管理</span><span class="tag">商业智能</span>
+    </article>
+    <article class="card application-card" data-category="business">
+      <div class="app-icon">💻</div><h3>软件开发</h3>
+      <p>辅助编写代码、生成测试、定位错误、阅读文档与重构程序，提高部分开发任务的效率。</p>
+      <span class="tag">代码助手</span><span class="tag">自动测试</span>
+    </article>
+    <article class="card application-card" data-category="life">
+      <div class="app-icon">🎓</div><h3>教育与学习</h3>
+      <p>提供个性化练习、语言学习、知识解释和学习反馈，同时需要防止错误信息与过度依赖。</p>
+      <span class="tag">智能辅导</span><span class="tag">个性化学习</span>
+    </article>
+    <article class="card application-card" data-category="life">
+      <div class="app-icon">🎨</div><h3>创意与内容生产</h3>
+      <p>协助生成文案、设计草图、音乐、视频素材与创意方案，人的审美、判断和原创贡献依然重要。</p>
+      <span class="tag">AIGC</span><span class="tag">数字创作</span>
+    </article>
+  </div>
+  <p class="muted small" id="filterStatus" aria-live="polite" style="margin-top:15px">显示全部 9 个应用案例</p>
+</div>
+</section>
+
+<section class="section" id="industry">
+<div class="container">
+  <div class="section-head">
+    <span class="kicker">05 / INDUSTRIAL AI</span>
+    <h2>AI 与智能制造：从“自动化”迈向“智能化”</h2>
+    <p class="muted">在工业现场，AI 应与设备、控制系统、质量体系、人员技能和生产管理结合，才能从技术演示走向稳定的生产价值。</p>
+  </div>
+  <div class="grid-2">
+    <div class="card">
+      <h3>传统自动化与 AI 增强制造</h3>
+      <table style="width:100%;border-collapse:collapse;font-size:13px">
+        <thead><tr style="color:var(--cyan);text-align:left">
+          <th style="padding:10px 5px;border-bottom:1px solid var(--line)">维度</th>
+          <th style="padding:10px 5px;border-bottom:1px solid var(--line)">传统方式</th>
+          <th style="padding:10px 5px;border-bottom:1px solid var(--line)">AI 增强</th>
+        </tr></thead>
+        <tbody>
+          <tr><td style="padding:12px 5px;border-bottom:1px solid var(--line)">设备维护</td><td style="padding:12px 5px;border-bottom:1px solid var(--line)">定期检修</td><td style="padding:12px 5px;border-bottom:1px solid var(--line)">预测风险</td></tr>
+          <tr><td style="padding:12px 5px;border-bottom:1px solid var(--line)">质量检测</td><td style="padding:12px 5px;border-bottom:1px solid var(--line)">人工抽检</td><td style="padding:12px 5px;border-bottom:1px solid var(--line)">视觉辅助检测</td></tr>
+          <tr><td style="padding:12px 5px;border-bottom:1px solid var(--line)">生产排程</td><td style="padding:12px 5px;border-bottom:1px solid var(--line)">固定规则</td><td style="padding:12px 5px;border-bottom:1px solid var(--line)">数据辅助优化</td></tr>
+          <tr><td style="padding:12px 5px">能源管理</td><td style="padding:12px 5px">经验调节</td><td style="padding:12px 5px">预测与优化</td></tr>
+        </tbody>
+      </table>
+      <p class="small muted">AI 并非在所有场景都优于传统方案。实际效果需要通过现场试点和数据验证。</p>
+    </div>
+    <div class="card">
+      <h3>工业 AI 落地的五个步骤</h3>
+      <div class="risk-item"><div class="risk-icon">01</div><div><h3>明确业务问题</h3><p>例如非计划停机、缺陷漏检或能源消耗偏高。</p></div></div>
+      <div class="risk-item"><div class="risk-icon">02</div><div><h3>建立可靠的数据基础</h3><p>打通设备、传感器、质量和生产管理数据。</p></div></div>
+      <div class="risk-item"><div class="risk-icon">03</div><div><h3>小范围试点验证</h3><p>选择一条产线或一类设备，建立基准指标。</p></div></div>
+      <div class="risk-item"><div class="risk-icon">04</div><div><h3>嵌入业务流程</h3><p>让分析结果进入点检、检修、质量和调度流程。</p></div></div>
+      <div class="risk-item"><div class="risk-icon">05</div><div><h3>持续评估与改进</h3><p>监测误报漏报、模型漂移、收益和安全边界。</p></div></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="section section-alt" id="future">
+<div class="container">
+  <div class="section-head">
+    <span class="kicker">06 / FUTURE OUTLOOK</span>
+    <h2>未来五至十年，AI 可能走向哪里？</h2>
+    <p class="muted">以下内容是基于当前技术方向的趋势分析，而非确定性预测。发展速度将受到技术突破、成本、监管、能源与社会接受程度等因素影响。</p>
+  </div>
+
+  <div class="grid-3">
+    <article class="card forecast-card">
+      <span class="horizon">NEAR TERM · 近期</span>
+      <h3>01. AI 成为日常工作助手</h3>
+      <p>写作、搜索、数据整理、软件开发和办公自动化将进一步融入现有工作流程。重点从单纯生成内容转向可靠完成具体任务。</p>
+      <div class="bottom"><span class="small muted">趋势判断：较高确定性</span><div class="confidence"><span style="width:88%"></span></div></div>
+    </article>
+    <article class="card forecast-card">
+      <span class="horizon">MEDIUM TERM · 中期</span>
+      <h3>02. 多智能体协作与流程重构</h3>
+      <p>不同 AI 系统可能分别负责分析、执行、检查与报告，在权限约束和人工监督下协同完成复杂工作。</p>
+      <div class="bottom"><span class="small muted">趋势判断：方向明确，落地有差异</span><div class="confidence"><span style="width:70%"></span></div></div>
+    </article>
+    <article class="card forecast-card">
+      <span class="horizon">MEDIUM TERM · 中长期</span>
+      <h3>03. AI 与机器人进一步融合</h3>
+      <p>视觉、语言、空间理解与运动控制的结合，有望拓展机器人在物流、制造、服务和部分危险环境中的应用。</p>
+      <div class="bottom"><span class="small muted">趋势判断：取决于硬件与安全成本</span><div class="confidence"><span style="width:65%"></span></div></div>
+    </article>
+    <article class="card forecast-card">
+      <span class="horizon">SCIENCE · 科学研究</span>
+      <h3>04. AI 辅助科学发现</h3>
+      <p>AI 可能加速材料设计、蛋白质研究、模拟计算和实验方案探索，但成果仍需通过科学验证。</p>
+      <div class="bottom"><span class="small muted">趋势判断：潜力较大</span><div class="confidence"><span style="width:78%"></span></div></div>
+    </article>
+    <article class="card forecast-card">
+      <span class="horizon">INFRASTRUCTURE · 基础设施</span>
+      <h3>05. 更高效、更专业的模型</h3>
+      <p>模型压缩、端侧推理、专用芯片、检索增强和领域模型有望降低部分应用成本，并改善数据控制能力。</p>
+      <div class="bottom"><span class="small muted">趋势判断：研发活跃</span><div class="confidence"><span style="width:84%"></span></div></div>
+    </article>
+    <article class="card forecast-card">
+      <span class="horizon">SOCIETY · 社会变革</span>
+      <h3>06. 人机协作成为重要能力</h3>
+      <p>未来竞争力可能越来越取决于提出好问题、核验信息、理解业务、组织协作和承担责任的能力。</p>
+      <div class="bottom"><span class="small muted">趋势判断：值得持续关注</span><div class="confidence"><span style="width:82%"></span></div></div>
+    </article>
+  </div>
+
+  <div class="balance-box" style="margin-top:25px">
+    <h3>一个重要问题：AI 会不会发展到超越人类？</h3>
+    <p class="muted">必须区分不同能力维度。AI 已经能在一些特定任务上超过人类平均水平或顶尖表现，但这不等于它在所有现实任务中都具备可靠的通用能力。关于通用人工智能（AGI）何时实现、如何定义以及能否实现稳定自主能力，仍存在重大不确定性。讨论未来时，应区分已观察到的进展、合理推测与尚未证实的设想。</p>
+  </div>
+</div>
+</section>
+
+<section class="section" id="chartSection">
+<div class="container">
+  <div class="section-head">
+    <span class="kicker">07 / TREND EXPLORER</span>
+    <h2>观察 AI 技术发展的不同维度</h2>
+    <p class="muted">切换观察维度，了解研究能力、应用普及与治理建设如何共同影响 AI 产业的发展。</p>
+  </div>
+  <div class="chart-wrap">
+    <div class="filter-row" id="chartControls">
+      <button class="filter-btn active" data-chart="capability">能力演进</button>
+      <button class="filter-btn" data-chart="adoption">应用普及</button>
+      <button class="filter-btn" data-chart="governance">治理建设</button>
+    </div>
+    <canvas id="trendChart" aria-label="人工智能发展趋势示意图"></canvas>
+    <div class="chart-legend">
+      <span><i class="legend-dot" style="background:var(--cyan)"></i><span id="chartLegend">示意指数</span></span>
+    </div>
+    <p class="chart-note" id="chartNote">示意性趋势图：数值用于解释不同阶段的变化方向，并非实际统计数据，也不代表对未来的精确预测。</p>
+  </div>
+</div>
+</section>
+
+<section class="section section-alt" id="ethics">
+<div class="container">
+  <div class="section-head">
+    <span class="kicker">08 / RISK & GOVERNANCE</span>
+    <h2>机遇越大，越需要负责任地发展</h2>
+    <p class="muted">人工智能既能扩大人的能力，也可能放大已有的偏差、错误和安全风险。技术进步需要与制度、专业规范和社会治理协同推进。</p>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="risk-item">
+        <div class="risk-icon">🎭</div>
+        <div><h3>虚假信息与深度伪造</h3><p>合成文本、图片、音频和视频可能被用于误导。重要信息应核实来源，并使用可靠的验证机制。</p></div>
+      </div>
+      <div class="risk-item">
+        <div class="risk-icon">🔒</div>
+        <div><h3>隐私与数据安全</h3><p>敏感数据输入、模型训练和第三方工具调用可能带来泄露风险，应遵循最小必要原则和访问控制。</p></div>
+      </div>
+      <div class="risk-item">
+        <div class="risk-icon">⚖️</div>
+        <div><h3>偏见与公平性</h3><p>训练数据和系统设计中的偏差可能导致不公平结果，需进行适当的评估、监测与纠正。</p></div>
+      </div>
+      <div class="risk-item">
+        <div class="risk-icon">💼</div>
+        <div><h3>就业与技能转型</h3><p>部分工作任务可能被自动化，也会产生新的工作内容。培训、组织调整和社会保障都很重要。</p></div>
+      </div>
+      <div class="risk-item">
+        <div class="risk-icon">⚠️</div>
+        <div><h3>可靠性与责任边界</h3><p>模型可能生成错误答案或错误执行任务。高风险场景应设置验证、权限限制、审计与人工监督。</p></div>
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <h3>负责任的 AI：六项实践原则</h3>
+        <div class="risk-item"><div class="risk-icon">01</div><div><h3>透明与可解释</h3><p>说明系统用途、能力限制及重要决策的依据。</p></div></div>
+        <div class="risk-item"><div class="risk-icon">02</div><div><h3>安全与稳健</h3><p>进行测试、风险评估、监控与故障处理。</p></div></div>
+        <div class="risk-item"><div class="risk-icon">03</div><div><h3>隐私保护</h3><p>限制敏感数据的收集、访问、保留与共享。</p></div></div>
+        <div class="risk-item"><div class="risk-icon">04</div><div><h3>公平与包容</h3><p>识别偏差，关注不同群体受到的影响。</p></div></div>
+        <div class="risk-item"><div class="risk-icon">05</div><div><h3>人类监督</h3><p>关键决策保留适当的人类审查与干预机制。</p></div></div>
+        <div class="risk-item"><div class="risk-icon">06</div><div><h3>持续问责</h3><p>明确责任主体，记录系统行为并持续改进。</p></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="section" id="learning">
+<div class="container">
+  <div class="section-head">
+    <span class="kicker">09 / LEARNING PATH</span>
+    <h2>普通人如何更好地拥抱 AI 时代？</h2>
+    <p class="muted">不必人人都成为算法工程师。根据自己的工作与兴趣，建立分层的 AI 素养更加实际。</p>
+  </div>
+  <div class="grid-3">
+    <article class="card">
+      <div class="card-icon">🌱</div><h3>第一阶段：理解</h3>
+      <p>学习 AI 的基本概念、常见模型、能力边界和信息核验方法。先知道什么适合交给 AI，什么不适合。</p>
+      <span class="tag">基础素养</span><span class="tag">事实核查</span>
+    </article>
+    <article class="card">
+      <div class="card-icon">🛠️</div><h3>第二阶段：实践</h3>
+      <p>尝试使用 AI 辅助写作、整理资料、分析数据、编写代码或优化工作流程，记录投入、质量和效率变化。</p>
+      <span class="tag">工作流</span><span class="tag">效率提升</span>
+    </article>
+    <article class="card">
+      <div class="card-icon">🚀</div><h3>第三阶段：创造</h3>
+      <p>结合专业知识与真实需求，搭建自动化流程、知识库或小型应用，并建立安全、评估和维护机制。</p>
+      <span class="tag">系统集成</span><span class="tag">持续创新</span>
+    </article>
+  </div>
+
+  <div class="callout" style="margin-top:25px">
+    <h3 style="margin:0 0 8px">一个实用原则</h3>
+    <p>把 AI 当作能力增强工具，而不是不加判断的权威。让 AI 负责它擅长的部分，让人类负责目标设定、价值判断、结果核验和责任承担。</p>
+  </div>
+</div>
+</section>
+
+<section class="section section-alt" id="quiz">
+<div class="container">
+  <div class="section-head">
+    <span class="kicker">10 / KNOWLEDGE CHECK</span>
+    <h2>AI 知识挑战：测试你的理解</h2>
+    <p class="muted">完成以下小测验，检验你对 AI 发展史与技术概念的掌握程度。</p>
+  </div>
+
+  <div class="card" style="max-width:780px">
+    <div style="display:flex;justify-content:space-between;gap:12px;align-items:center">
+      <span class="tag" id="quizCategory">人工智能基础</span>
+      <span class="muted small" id="quizCount">第 1 / 5 题</span>
+    </div>
+    <div class="progress-track" style="margin-top:15px"><div id="quizProgress" style="height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--purple));transition:width .3s"></div></div>
+    <h3 id="quizQuestion" style="margin-top:25px">哪一项技术是现代许多大语言模型的重要架构基础？</h3>
+    <div id="quizOptions"></div>
+    <div id="quizFeedback" class="quiz-feedback" hidden aria-live="polite"></div>
+    <div class="quiz-footer">
+      <span class="muted small" id="quizScore">当前得分：0</span>
+      <button class="btn btn-primary" id="nextQuestion" disabled>下一题 →</button>
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="section" id="conclusion">
+<div class="container">
+  <div class="balance-box">
+    <span class="kicker">FINAL THOUGHTS</span>
+    <h2>未来不是单纯由 AI 决定的，<br><span class="gradient-text">而是由人如何使用 AI 决定的。</span></h2>
+    <p class="muted">人工智能的发展是一场技术、经济与社会共同参与的长期变革。它可能帮助人类更高效地解决复杂问题，也要求我们更认真地对待安全、责任、隐私和公平。</p>
+    <p class="muted">真正值得期待的未来，不只是拥有更强大的模型，而是让先进技术能够可靠地服务于人的需求，帮助更多人创造价值，并在创新与风险之间建立合理的平衡。</p>
+    <a class="btn btn-primary" href="#home">重新探索 AI 世界 ↑</a>
+  </div>
+</div>
+</section>
+</main>
+
+<footer class="footer">
+<div class="container footer-grid">
+  <div>
+    <div class="logo"><span class="logo-symbol">◈</span>AI FRONTIER</div>
+    <p>人工智能的发展与未来展望</p>
+    <p>一份面向学习者、技术爱好者和产业实践者的 AI 科普网页。</p>
+    <p>本页面为独立 HTML 演示项目，内容用于一般性学习与交流。</p>
+  </div>
+  <div>
+    <h3>快速导航</h3>
+    <a href="#history">人工智能发展历史</a>
+    <a href="#technology">核心技术与工作原理</a>
+    <a href="#applications">产业应用案例</a>
+    <a href="#future">未来趋势展望</a>
+    <a href="#ethics">风险与治理原则</a>
+  </div>
+</div>
+<div class="container" style="border-top:1px solid #25334e;margin-top:30px;padding-top:20px">
+  <p>© 2026 AI FRONTIER · LEARN · EXPLORE · BUILD</p>
+  <p class="small">历史事件用于背景介绍；趋势图为示意数据；未来预测存在不确定性。涉及具体政策、模型能力或市场数据时，应进一步核对最新的一手资料。</p>
+</div>
+</footer>
+
+<button class="back-top" id="backTop" aria-label="返回顶部" title="返回顶部">↑</button>
+
+<script>
+/* =========================
+   1. 导航与阅读进度
+========================= */
+const navLinks = document.getElementById('navLinks');
+document.getElementById('menuBtn').addEventListener('click', () => {
+  navLinks.classList.toggle('open');
+});
+navLinks.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => navLinks.classList.remove('open'));
+});
+
+function updateReadingProgress(){
+  const max = document.documentElement.scrollHeight - window.innerHeight;
+  const percent = max > 0 ? window.scrollY / max * 100 : 0;
+  document.getElementById('readingProgress').style.width =
+    Math.min(100, Math.max(0, percent)) + '%';
+}
+window.addEventListener('scroll', updateReadingProgress, {passive:true});
+window.addEventListener('resize', updateReadingProgress);
+updateReadingProgress();
+
+document.getElementById('backTop').addEventListener('click', () => {
+  window.scrollTo({top:0,behavior:'smooth'});
+});
+
+/* =========================
+   2. 深浅主题切换
+========================= */
+const themeBtn = document.getElementById('themeBtn');
+themeBtn.addEventListener('click', () => {
+  document.body.classList.toggle('light');
+  const light = document.body.classList.contains('light');
+  themeBtn.textContent = light ? '☾' : '☼';
+  themeBtn.setAttribute('aria-label', light ? '切换深色主题' : '切换浅色主题');
+  drawChart();
+});
+
+/* =========================
+   3. 应用领域过滤器
+========================= */
+const appButtons = document.querySelectorAll('#appFilters .filter-btn');
+const appCards = document.querySelectorAll('.application-card');
+const filterStatus = document.getElementById('filterStatus');
+
+appButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    appButtons.forEach(b => b.classList.remove('active'));
+    button.classList.add('active');
+
+    const filter = button.dataset.filter;
+    let count = 0;
+
+    appCards.forEach(card => {
+      const show = filter === 'all' || card.dataset.category === filter;
+      card.hidden = !show;
+      if(show) count++;
+    });
+
+    filterStatus.textContent = `当前显示 ${count} 个应用案例`;
+  });
+});
+
+/* =========================
+   4. AI 趋势示意图
+   数据仅用于展示概念，不代表统计事实
+========================= */
+const chartData = {
+  capability:{
+    label:'技术能力示意指数',
+    note:'能力演进示意：不同技术任务的进步速度不同，指数仅用于视觉说明，并非统一测量标准。',
+    values:[4,7,11,18,26,35,49,66,79,91],
+    color:'cyan'
+  },
+  adoption:{
+    label:'应用普及示意指数',
+    note:'应用普及示意：技术能力转化为实际使用通常存在时间差，普及程度也因行业和地区而异。',
+    values:[2,3,5,9,15,23,34,50,68,83],
+    color:'blue'
+  },
+  governance:{
+    label:'治理建设示意指数',
+    note:'治理建设示意：标准、法规、评测与组织实践不断发展，但各地区和领域的进展并不一致。',
+    values:[1,2,3,5,9,16,26,40,56,70],
+    color:'purple'
+  }
+};
+let activeChart = 'capability';
+
+document.querySelectorAll('#chartControls .filter-btn').forEach(button => {
+  button.addEventListener('click', () => {
+    document.querySelectorAll('#chartControls .filter-btn')
+      .forEach(b => b.classList.remove('active'));
+    button.classList.add('active');
+    activeChart = button.dataset.chart;
+    drawChart();
+  });
+});
+
+function drawChart(){
+  const canvas = document.getElementById('trendChart');
+  const ctx = canvas.getContext('2d');
+  const rect = canvas.getBoundingClientRect();
+  const ratio = Math.min(window.devicePixelRatio || 1, 2);
+
+  canvas.width = Math.max(1, Math.floor(rect.width * ratio));
+  canvas.height = Math.max(1, Math.floor(rect.height * ratio));
+  ctx.setTransform(ratio,0,0,ratio,0,0);
+
+  const width = rect.width;
+  const height = rect.height;
+  const isLight = document.body.classList.contains('light');
+  const textColor = isLight ? '#5f6e8b' : '#98a8c7';
+  const gridColor = isLight ? '#d8e1f1' : '#263858';
+  const data = chartData[activeChart];
+  const cssColor = getComputedStyle(document.body).getPropertyValue('--' + data.color).trim() ||
+    getComputedStyle(document.body).getPropertyValue('--cyan').trim();
+
+  ctx.clearRect(0,0,width,height);
+
+  const pad = {left:38,right:15,top:20,bottom:35};
+  const cw = width-pad.left-pad.right;
+  const ch = height-pad.top-pad.bottom;
+
+  ctx.font = '11px system-ui, sans-serif';
+  ctx.textBaseline = 'middle';
+
+  for(let v=0;v<=100;v+=25){
+    const y = pad.top + ch - (v/100)*ch;
+    ctx.beginPath();
+    ctx.strokeStyle = gridColor;
+    ctx.lineWidth = 1;
+    ctx.moveTo(pad.left,y);
+    ctx.lineTo(width-pad.right,y);
+    ctx.stroke();
+    ctx.fillStyle = textColor;
+    ctx.textAlign = 'right';
+    ctx.fillText(v,y === 0 ? 8 : y, pad.left-9);
+  }
+
+  const labels = ['1950','1970','1990','2000','2012','2016','2020','2022','2024','2026'];
+  const pts = data.values.map((v,i) => ({
+    x:pad.left + (i/(data.values.length-1))*cw,
+    y:pad.top + ch - (v/100)*ch
+  }));
+
+  ctx.beginPath();
+  pts.forEach((p,i) => i ? ctx.lineTo(p.x,p.y) : ctx.moveTo(p.x,p.y));
+  ctx.lineTo(pts[pts.length-1].x,pad.top+ch);
+  ctx.lineTo(pts[0].x,pad.top+ch);
+  ctx.closePath();
+  const grad = ctx.createLinearGradient(0,pad.top,0,pad.top+ch);
+  grad.addColorStop(0,isLight?'rgba(64,92,224,.20)':'rgba(83,228,243,.22)');
+  grad.addColorStop(1,'rgba(83,228,243,0)');
+  ctx.fillStyle = grad;
+  ctx.fill();
+
+  ctx.beginPath();
+  pts.forEach((p,i) => i ? ctx.lineTo(p.x,p.y) : ctx.moveTo(p.x,p.y));
+  ctx.strokeStyle = cssColor;
+  ctx.lineWidth = 2.5;
+  ctx.stroke();
+
+  pts.forEach(p => {
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,3.2,0,Math.PI*2);
+    ctx.fillStyle = cssColor;
+    ctx.fill();
+  });
+
+  ctx.fillStyle = textColor;
+  ctx.textAlign = 'center';
+  labels.forEach((label,i) => {
+    if(width < 450 && i%2===1 && i!==labels.length-1) return;
+    const x = pad.left + (i/(labels.length-1))*cw;
+    ctx.fillText(label,x,height-15);
+  });
+
+  document.getElementById('chartLegend').textContent = data.label;
+  document.getElementById('chartNote').textContent = data.note;
+}
+window.addEventListener('resize',drawChart);
+drawChart();
+
+/* =========================
+   5. AI 知识问答
+========================= */
+const quizData = [
+  {
+    category:'人工智能基础',
+    question:'哪一项技术是现代许多大语言模型的重要架构基础？',
+    options:['决策树','Transformer','关系型数据库','光学字符识别'],
+    answer:1,
+    explanation:'Transformer 架构于 2017 年提出，注意力机制是其重要组成部分。它成为现代许多大语言模型的重要技术基础。'
+  },
+  {
+    category:'发展历史',
+    question:'哪一年通常被视为人工智能成为正式研究领域的重要历史节点？',
+    options:['1920 年','1945 年','1956 年','2008 年'],
+    answer:2,
+    explanation:'1956 年的达特茅斯研讨会通常被视为人工智能研究领域形成的重要标志。'
+  },
+  {
+    category:'模型原理',
+    question:'为什么不能把大语言模型的每个回答都视为事实？',
+    options:[
+      '因为模型只能处理数字',
+      '因为模型可能生成听起来合理但实际错误的内容',
+      '因为模型不能生成中文',
+      '因为模型完全不使用训练数据'
+    ],
+    answer:1,
+    explanation:'大语言模型可能产生事实错误、推理错误或缺乏依据的回答。因此重要结论需要核实来源并进行验证。'
+  },
+  {
+    category:'智能体',
+    question:'与只生成文本的模型相比，AI 智能体通常增加了什么能力？',
+    options:[
+      '只能回答固定问题',
+      '完全不需要权限管理',
+      '可以结合工具与反馈尝试执行多步骤任务',
+      '保证所有任务都能正确完成'
+    ],
+    answer:2,
+    explanation:'智能体可以结合工具调用、任务状态和反馈机制执行多步骤任务，但不意味着它一定正确或不需要监督。'
+  },
+  {
+    category:'负责任的 AI',
+    question:'在医疗或工业安全等高风险场景中，哪种做法更合理？',
+    options:[
+      '无条件接受模型输出',
+      '取消所有人工审核',
+      '只根据模型回答做最终决定',
+      '结合专业判断、结果验证、权限限制和人工监督'
+    ],
+    answer:3,
+    explanation:'高风险场景需要适当的专业审查、安全控制、验证与问责机制，不能把责任完全交给模型。'
+  }
+];
+
+let quizIndex = 0;
+let quizScore = 0;
+let answered = false;
+let quizFinished = false;
+
+const questionEl = document.getElementById('quizQuestion');
+const optionsEl = document.getElementById('quizOptions');
+const feedbackEl = document.getElementById('quizFeedback');
+const nextBtn = document.getElementById('nextQuestion');
+
+function renderQuiz(){
+  answered = false;
+  quizFinished = false;
+  const item = quizData[quizIndex];
+
+  document.getElementById('quizCategory').textContent = item.category;
+  document.getElementById('quizCount').textContent =
+    `第 ${quizIndex+1} / ${quizData.length} 题`;
+  document.getElementById('quizProgress').style.width =
+    (quizIndex/quizData.length*100)+'%';
+  document.getElementById('quizScore').textContent =
+    `当前得分：${quizScore}`;
+  questionEl.textContent = item.question;
+  optionsEl.replaceChildren();
+  feedbackEl.hidden = true;
+  nextBtn.disabled = true;
+  nextBtn.textContent = quizIndex === quizData.length-1 ? '查看结果 →' : '下一题 →';
+
+  item.options.forEach((option,i) => {
+    const btn = document.createElement('button');
+    btn.className = 'quiz-option';
+    btn.textContent = String.fromCharCode(65+i)+'. '+option;
+    btn.addEventListener('click',() => chooseAnswer(i,btn));
+    optionsEl.appendChild(btn);
+  });
+}
+
+function chooseAnswer(index,button){
+  if(answered || quizFinished) return;
+  answered = true;
+  const item = quizData[quizIndex];
+  const buttons = [...optionsEl.querySelectorAll('button')];
+
+  buttons.forEach((btn,i) => {
+    btn.disabled = true;
+    if(i === item.answer) btn.classList.add('correct');
+  });
+
+  if(index === item.answer){
+    quizScore++;
+    feedbackEl.textContent = '回答正确！'+item.explanation;
+  }else{
+    button.classList.add('wrong');
+    feedbackEl.textContent = '这次没有答对。正确答案是：'+
+      item.options[item.answer]+'。'+item.explanation;
+  }
+
+  feedbackEl.hidden = false;
+  document.getElementById('quizScore').textContent = `当前得分：${quizScore}`;
+  nextBtn.disabled = false;
+}
+
+nextBtn.addEventListener('click',() => {
+  if(quizFinished){
+    quizIndex = 0;
+    quizScore = 0;
+    renderQuiz();
+    return;
+  }
+  if(!answered) return;
+
+  if(quizIndex < quizData.length-1){
+    quizIndex++;
+    renderQuiz();
+  }else{
+    quizFinished = true;
+    document.getElementById('quizCount').textContent = '测验完成';
+    document.getElementById('quizProgress').style.width = '100%';
+    questionEl.textContent = `测验完成！你的得分是 ${quizScore} / ${quizData.length}`;
+    optionsEl.replaceChildren();
+    feedbackEl.hidden = false;
+
+    let message = '';
+    if(quizScore === 5){
+      message = '非常好！你已经掌握了本次测验涉及的核心概念。';
+    }else if(quizScore >= 3){
+      message = '掌握得不错。建议重新阅读答错题目的解释，加深理解。';
+    }else{
+      message = '建议再浏览一遍发展历史、技术原理和治理章节，然后重新挑战。';
+    }
+    feedbackEl.textContent = message;
+    document.getElementById('quizScore').textContent = `最终得分：${quizScore}`;
+    nextBtn.textContent = '重新测验 ↻';
+  }
+});
+
+renderQuiz();
+</script>
 </body>
-
 </html>
